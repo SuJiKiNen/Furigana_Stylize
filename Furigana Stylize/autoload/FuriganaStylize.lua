@@ -178,7 +178,7 @@ function set_config(subs)
 	end
 	
 	if button=="Save&&Apply" then
-		sytlize(subs)
+		stylize(subs)
 	end
 	
 	if button == "Cancel" then
