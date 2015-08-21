@@ -53,9 +53,9 @@ syl_time_mode = "syl";
 dialog_config=
 {
 	["mainTextLabel"]    				 		 ={class="label",	 											x=0,y=0,width=1,height=1,config=false,label="Main Text:"},
-	["maintextVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=1,widht=1,height=1,config=false,label="Vertical Position Fixed"},
+	["maintextVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=1,widht=1,height=1,config=false,label="Vertical Position Fixed:"},
 	["maintextVerticalPositionFixed"]		 	 ={class="floatedit",name ="maintextVerticalPositionFixed",		x=1,y=1,widht=1,height=1,config=true,value=0},
-	["maintextHorizontalPositionFixedLabel"]     ={class="label",	 											x=0,y=2,widht=1,height=1,config=false,label="Horizontal Position Fixed"},
+	["maintextHorizontalPositionFixedLabel"]     ={class="label",	 											x=0,y=2,widht=1,height=1,config=false,label="Horizontal Position Fixed:"},
 	["maintextHorizontalPositionFixed"]		 	 ={class="floatedit",name="maintextHorizontalPositionFixed",	x=1,y=2,widht=1,height=1,config=true,value=0},
 	
 	["furiganaLabel"]    				 		 ={class="label",												x=0,y=4,width=1,height=1,config=false,label="Furigana Text:"},
@@ -63,9 +63,9 @@ dialog_config=
 	["furiganaScale"]    						 ={class="floatedit",name="furiganaScale",   					x=1,y=5,width=1,height=1,config=true ,value=0.5},
 	["furiganaSpacingLabel"]					 ={class="label",       										x=0,y=6,width=1,height=1,config=false,label="Furigana Spacing:"},
 	["furiganaSpacing"]    						 ={class="floatedit",name="furiganaSpacing",  				    x=1,y=6,width=1,height=1,config=true ,value=0},
-	["furiganaVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=7,widht=1,height=1,config=false,label="Vertical Position Fixed"},
+	["furiganaVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=7,widht=1,height=1,config=false,label="Vertical Position Fixed:"},
 	["furiganaVerticalPositionFixed"]		 	 ={class="floatedit",name="furiganaVerticalPositionFixed",		x=1,y=7,widht=1,height=1,config=true,value=3.1},
-	["furiganaHorizontalPositionFixedLabel"]     ={class="label",												x=0,y=8,widht=1,height=1,config=false,label="Horizontal Position Fixed"},
+	["furiganaHorizontalPositionFixedLabel"]     ={class="label",												x=0,y=8,widht=1,height=1,config=false,label="Horizontal Position Fixed:"},
 	["furiganaHorizontalPositionFixed"]		 	 ={class="floatedit",name="furiganaHorizontalPositionFixed",	x=1,y=8,widht=1,height=1,config=true,value=-1},
 	
 	["othersLabel"]    				 		     ={class="label",												x=0,y=10,width=1,height=1,config=false,label="Others:"},
