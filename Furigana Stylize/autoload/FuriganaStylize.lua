@@ -64,7 +64,7 @@ dialog_config=
 	["furiganaSpacingLabel"]					 ={class="label",       										x=0,y=6,width=1,height=1,config=false,label="Furigana Spacing:"},
 	["furiganaSpacing"]    						 ={class="floatedit",name="furiganaSpacing",  				    x=1,y=6,width=1,height=1,config=true ,value=0},
 	["furiganaVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=7,widht=1,height=1,config=false,label="Vertical Position Fixed:"},
-	["furiganaVerticalPositionFixed"]		 	 ={class="floatedit",name="furiganaVerticalPositionFixed",		x=1,y=7,widht=1,height=1,config=true,value=3.1},
+	["furiganaVerticalPositionFixed"]		 	 ={class="floatedit",name="furiganaVerticalPositionFixed",		x=1,y=7,widht=1,height=1,config=true,value=3.0},
 	["furiganaHorizontalPositionFixedLabel"]     ={class="label",												x=0,y=8,widht=1,height=1,config=false,label="Horizontal Position Fixed:"},
 	["furiganaHorizontalPositionFixed"]		 	 ={class="floatedit",name="furiganaHorizontalPositionFixed",	x=1,y=8,widht=1,height=1,config=true,value=-1},
 	
@@ -76,7 +76,7 @@ dialog_config=
 	["generateSylLineLabel"]     			     ={class="label",												x=0,y=13,widht=1,height=1,config=false,label="Generate Syl Line:"},
 	["generateSylLine"]							 ={class="dropdown",name="generateSylLine",    					x=1,y=13,width=1,height=1,config=true,items={"true","false"},value="true"},
 	["generateFuriLineLabel"]     				 ={class="label",												x=0,y=14,widht=1,height=1,config=false,label="Generate Furi Line:"},
-	["generateFuriLine"]						 ={class="dropdown",name="generateFuriLine",				    x=1,y=14,width=1,height=1,config=true,items={"true","false"},value="false"},
+	["generateFuriLine"]						 ={class="dropdown",name="generateFuriLine",				    x=1,y=14,width=1,height=1,config=true,items={"true","false"},value="true"},
 	["sylTimeModeLabel"]     				 	 ={class="label",												x=0,y=15,widht=1,height=1,config=false,label="Syl Time Mode:"},
 	["sylTimeMode"]						 		 ={class="dropdown",name="sylTimeMode",						    x=1,y=15,width=1,height=1,config=true,items={"line","syl"},value="line"},
 	["furiTimeModeLabel"]     				 	 ={class="label",												x=0,y=16,widht=1,height=1,config=false,label="Furi Time Mode:"},
@@ -198,6 +198,7 @@ function stylize(subs)
    local dialog_end_i = nil
    dialog_start_i,dialog_end_i = get_dialogs_range(subs)
    for i=dialog_start_i,dialog_end_i do
+		aegisub.progress.set( (i-dialog_start_i) * 100 / (dialog_end_i-dialog_start_i) )
 		local line = subs[i]
 		karaskel.preproc_line_text(meta,styles,line)
 		karaskel.preproc_line_size(meta,styles,line)
@@ -207,7 +208,6 @@ function stylize(subs)
 			local syl = line.kara[k]
 			--if (not (no_blank_syl and is_syl_blank(syl))) and generate_syl_line then
 			if (not (configs["noBlankSyl"] and is_syl_blank(syl))) and configs["generateSylLine"] then
-			    --aegisub.debug.out("inin")
 				syl_count = syl_count + 1
 				local syl_line = table.copy(line)
 				syl_line.text =  syl.text_stripped
@@ -215,7 +215,7 @@ function stylize(subs)
 				syl_line.comment = false
 				syl_line.style = string.format("line_%d_syl_%d",i-dialog_start_i+1,syl_count)
 				syl_line.actor = string.format("{syl_%d_%d_%d}",syl.start_time,syl.end_time,syl.duration)
-				
+				syl_line.layer = syl_count
 				if configs["sylTimeMode"] == "syl" then
 					syl_line.start_time = line.start_time +syl.start_time
 					syl_line.end_time = line.start_time + syl.end_time
@@ -257,6 +257,7 @@ function stylize(subs)
 				furi_line.layer = furi_count
 				furi_line.style = string.format("line_%d_furi_%d",i-dialog_start_i+1,furi_count)
 				furi_line.actor = string.format("{furi_%d_%d_%d}",furi.start_time,furi.end_time,furi.duration)
+				furi_line.layer = furi_count
 				local furi_style = table.copy(line.styleref)
 				furi_style.name = furi_line.style
 				furi_style.margin_l = line.left+furi.left+ configs["furiganaHorizontalPositionFixed"] --furigana_horizontal_position_fixed
@@ -347,7 +348,6 @@ function is_furi_blank(furi)
 	if furi.duration <= 0 then
 		return true
 	end
-	
 	local t = furi.text_stripped
 	if t:len() <= 0 then return true end
 	t = t:gsub("[ \t\n\r]", "") -- regular ASCII space characters
@@ -359,12 +359,10 @@ function is_syl_blank(syl)
 	if syl.duration <= 0 then
 		return true
 	end
-	
-	-- try to remove common spacing characters
 	local t = syl.text_stripped
 	if t:len() <= 0 then return true end
-	t = t:gsub("[ \t\n\r]", "") -- regular ASCII space characters
-	t = t:gsub("　", "") -- fullwidth space
+	t = t:gsub("[ \t\n\r]", "") 
+	t = t:gsub("　", "")
 	return t:len() <= 0
 end
 
