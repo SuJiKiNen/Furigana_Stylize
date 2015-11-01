@@ -28,8 +28,9 @@ configs= {
 	["furiganaSpacing"] = 0,
 	["noBlankSyl"] = true,
 	["noBlankFuri"] = true,
+	["generateLine"] = true,
 	["generateFuriLine"] = true,
-	["generateSylLine"] = true,
+	["generateSylLine"] = false,
 	["sylTimeMode"] = "line",
 	["furiTimeMode"] = "line",
 }
@@ -48,39 +49,41 @@ generate_furi_line = true
 generate_syl_line = false
 syl_time_mode = "syl";
 ]]
---  settings
+--	settings
 
 dialog_config=
 {
-	["mainTextLabel"]    				 		 ={class="label",	 											x=0,y=0,width=1,height=1,config=false,label="Main Text:"},
-	["maintextVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=1,widht=1,height=1,config=false,label="Vertical Position Fixed:"},
-	["maintextVerticalPositionFixed"]		 	 ={class="floatedit",name ="maintextVerticalPositionFixed",		x=1,y=1,widht=1,height=1,config=true,value=0},
-	["maintextHorizontalPositionFixedLabel"]     ={class="label",	 											x=0,y=2,widht=1,height=1,config=false,label="Horizontal Position Fixed:"},
-	["maintextHorizontalPositionFixed"]		 	 ={class="floatedit",name="maintextHorizontalPositionFixed",	x=1,y=2,widht=1,height=1,config=true,value=0},
+	["mainTextLabel"]							 ={class="label",												x=0,y=0,width=1,height=1,config=false,label="Main Text:"},
+	["maintextVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=1,width=1,height=1,config=false,label="Vertical Position Fixed:"},
+	["maintextVerticalPositionFixed"]			 ={class="floatedit",name ="maintextVerticalPositionFixed",		x=1,y=1,width=1,height=1,config=true,value=0},
+	["maintextHorizontalPositionFixedLabel"]	 ={class="label",												x=0,y=2,width=1,height=1,config=false,label="Horizontal Position Fixed:"},
+	["maintextHorizontalPositionFixed"]			 ={class="floatedit",name="maintextHorizontalPositionFixed",	x=1,y=2,width=1,height=1,config=true,value=0},
 	
-	["furiganaLabel"]    				 		 ={class="label",												x=0,y=4,width=1,height=1,config=false,label="Furigana Text:"},
-	["furiganaScaleLabel"]						 ={class="label",      										    x=0,y=5,width=1,height=1,config=false,label="Furigana Scale:"},
-	["furiganaScale"]    						 ={class="floatedit",name="furiganaScale",   					x=1,y=5,width=1,height=1,config=true ,value=0.5},
-	["furiganaSpacingLabel"]					 ={class="label",       										x=0,y=6,width=1,height=1,config=false,label="Furigana Spacing:"},
-	["furiganaSpacing"]    						 ={class="floatedit",name="furiganaSpacing",  				    x=1,y=6,width=1,height=1,config=true ,value=0},
-	["furiganaVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=7,widht=1,height=1,config=false,label="Vertical Position Fixed:"},
-	["furiganaVerticalPositionFixed"]		 	 ={class="floatedit",name="furiganaVerticalPositionFixed",		x=1,y=7,widht=1,height=1,config=true,value=3.0},
-	["furiganaHorizontalPositionFixedLabel"]     ={class="label",												x=0,y=8,widht=1,height=1,config=false,label="Horizontal Position Fixed:"},
-	["furiganaHorizontalPositionFixed"]		 	 ={class="floatedit",name="furiganaHorizontalPositionFixed",	x=1,y=8,widht=1,height=1,config=true,value=-1},
+	["furiganaLabel"]							 ={class="label",												x=0,y=4,width=1,height=1,config=false,label="Furigana Text:"},
+	["furiganaScaleLabel"]						 ={class="label",												x=0,y=5,width=1,height=1,config=false,label="Furigana Scale:"},
+	["furiganaScale"]							 ={class="floatedit",name="furiganaScale",						x=1,y=5,width=1,height=1,config=true ,value=0.5},
+	["furiganaSpacingLabel"]					 ={class="label",												x=0,y=6,width=1,height=1,config=false,label="Furigana Spacing:"},
+	["furiganaSpacing"]							 ={class="floatedit",name="furiganaSpacing",					x=1,y=6,width=1,height=1,config=true ,value=0},
+	["furiganaVerticalPositionFixedLabel"]		 ={class="label",												x=0,y=7,width=1,height=1,config=false,label="Vertical Position Fixed:"},
+	["furiganaVerticalPositionFixed"]			 ={class="floatedit",name="furiganaVerticalPositionFixed",		x=1,y=7,width=1,height=1,config=true,value=3.0},
+	["furiganaHorizontalPositionFixedLabel"]	 ={class="label",												x=0,y=8,width=1,height=1,config=false,label="Horizontal Position Fixed:"},
+	["furiganaHorizontalPositionFixed"]			 ={class="floatedit",name="furiganaHorizontalPositionFixed",	x=1,y=8,width=1,height=1,config=true,value=-1},
 	
-	["othersLabel"]    				 		     ={class="label",												x=0,y=10,width=1,height=1,config=false,label="Others:"},
-	["noBlankSylLabel"]     					 ={class="label",												x=0,y=11,widht=1,height=1,config=false,label="No Blank Syl:"},
-	["noBlankSyl"]								 ={class="dropdown",name="noBlankSyl",						    x=1,y=11,width=1,height=1,config=true,items={"true","false"},value="true"},
-	["noBlankFuriLabel"]     					 ={class="label",												x=0,y=12,widht=1,height=1,config=false,label="No Blank Furi:"},
+	["othersLabel"]								 ={class="label",												x=0,y=10,width=1,height=1,config=false,label="Others:"},
+	["noBlankSylLabel"]							 ={class="label",												x=0,y=11,width=1,height=1,config=false,label="No Blank Syl:"},
+	["noBlankSyl"]								 ={class="dropdown",name="noBlankSyl",							x=1,y=11,width=1,height=1,config=true,items={"true","false"},value="true"},
+	["noBlankFuriLabel"]						 ={class="label",												x=0,y=12,width=1,height=1,config=false,label="No Blank Furi:"},
 	["noBlankFuri"]								 ={class="dropdown",name="noBlankFuri",							x=1,y=12,width=1,height=1,config=true,items={"true","false"},value="true"},
-	["generateSylLineLabel"]     			     ={class="label",												x=0,y=13,widht=1,height=1,config=false,label="Generate Syl Line:"},
-	["generateSylLine"]							 ={class="dropdown",name="generateSylLine",    					x=1,y=13,width=1,height=1,config=true,items={"true","false"},value="true"},
-	["generateFuriLineLabel"]     				 ={class="label",												x=0,y=14,widht=1,height=1,config=false,label="Generate Furi Line:"},
-	["generateFuriLine"]						 ={class="dropdown",name="generateFuriLine",				    x=1,y=14,width=1,height=1,config=true,items={"true","false"},value="true"},
-	["sylTimeModeLabel"]     				 	 ={class="label",												x=0,y=15,widht=1,height=1,config=false,label="Syl Time Mode:"},
-	["sylTimeMode"]						 		 ={class="dropdown",name="sylTimeMode",						    x=1,y=15,width=1,height=1,config=true,items={"line","syl"},value="line"},
-	["furiTimeModeLabel"]     				 	 ={class="label",												x=0,y=16,widht=1,height=1,config=false,label="Furi Time Mode:"},
-	["furiTimeMode"]						 	 ={class="dropdown",name="furiTimeMode",						x=1,y=16,width=1,height=1,config=true,items={"line","syl","furi"},value="line"},
+	["generateLineLabel"]						 ={class="label",												x=0,y=13,width=1,height=1,config=false,label="Generate Line:"},
+	["generateLine"]							 ={class="dropdown",name="generateLine",						x=1,y=13,width=1,height=1,config=true,items={"true","false"},value="true"},
+	["generateSylLineLabel"]					 ={class="label",												x=0,y=14,width=1,height=1,config=false,label="Generate Syl Line:"},
+	["generateSylLine"]							 ={class="dropdown",name="generateSylLine",						x=1,y=14,width=1,height=1,config=true,items={"true","false"},value="true"},
+	["generateFuriLineLabel"]					 ={class="label",												x=0,y=15,width=1,height=1,config=false,label="Generate Furi Line:"},
+	["generateFuriLine"]						 ={class="dropdown",name="generateFuriLine",					x=1,y=15,width=1,height=1,config=true,items={"true","false"},value="true"},
+	["sylTimeModeLabel"]						 ={class="label",												x=0,y=16,width=1,height=1,config=false,label="Syl Time Mode:"},
+	["sylTimeMode"]								 ={class="dropdown",name="sylTimeMode",							x=1,y=16,width=1,height=1,config=true,items={"line","syl"},value="line"},
+	["furiTimeModeLabel"]						 ={class="label",												x=0,y=17,width=1,height=1,config=false,label="Furi Time Mode:"},
+	["furiTimeMode"]							 ={class="dropdown",name="furiTimeMode",						x=1,y=17,width=1,height=1,config=true,items={"line","syl","furi"},value="line"},
 }
 
 function remove_furiganas(subs) 
@@ -109,7 +112,7 @@ end
 
 function set_furigana_spacing(styles)
 	for i=1, #styles do
-      local style = styles[i]
+	  local style = styles[i]
 	  if style.name:match("furigana") then
 			style.spacing = dialog_config["furiganaSpacing"].value
 	  end
@@ -203,14 +206,23 @@ function stylize(subs)
 		karaskel.preproc_line_text(meta,styles,line)
 		karaskel.preproc_line_size(meta,styles,line)
 		karaskel.preproc_line_pos(meta,styles,line)
+		
+		if configs["generateLine"] and line.comment == true then
+			local nline = table.copy(line)
+			nline.text = nline.text_stripped
+			nline.comment = false
+			nline.effect = "furigana"
+			subs.append(nline)
+		end
+		
 		local syl_count = 0
 		for k=1,#line.kara do 
 			local syl = line.kara[k]
 			--if (not (no_blank_syl and is_syl_blank(syl))) and generate_syl_line then
-			if (not (configs["noBlankSyl"] and is_syl_blank(syl))) and configs["generateSylLine"] then
+			if (not (configs["noBlankSyl"] and is_syl_blank(syl))) and configs["generateSylLine"] and line.comment==true then
 				syl_count = syl_count + 1
 				local syl_line = table.copy(line)
-				syl_line.text =  syl.text_stripped
+				syl_line.text =	 syl.text_stripped
 				syl_line.effect = "furigana"
 				syl_line.comment = false
 				syl_line.style = string.format("line_%d_syl_%d",i-dialog_start_i+1,syl_count)
@@ -231,9 +243,9 @@ function stylize(subs)
 				syl_style.margin_l = line.left+syl.left+ configs["maintextHorizontalPositionFixed"] --maintext_horizontal_position_fixed
 				syl_style.margin_r = 0
 				syl_style.align = ( (line.styleref.align <4) and 1) or 7
-				syl_style.margin_t = line.eff_margin_t + configs["maintextVerticalPositionFixed"]   --maintext_vertical_position_fixed
-				syl_style.margin_b = line.eff_margin_b + configs["maintextVerticalPositionFixed"]   --maintext_vertical_position_fixed
-				syl_style.margin_v = line.eff_margin_v + configs["maintextVerticalPositionFixed"]   --maintext_vertical_position_fixed
+				syl_style.margin_t = line.eff_margin_t + configs["maintextVerticalPositionFixed"]	--maintext_vertical_position_fixed
+				syl_style.margin_b = line.eff_margin_b + configs["maintextVerticalPositionFixed"]	--maintext_vertical_position_fixed
+				syl_style.margin_v = line.eff_margin_v + configs["maintextVerticalPositionFixed"]	--maintext_vertical_position_fixed
 
 				if not styles[ syl_style.name ] then 
 					table.insert(main_styles,syl_style)
@@ -248,7 +260,7 @@ function stylize(subs)
 		for j=1,line.furi.n do
 			local furi = line.furi[j]
 			--if (not (no_blank_furi and is_furi_blank(furi))) and generate_furi_line then
-			if (not (configs["noBlankFuri"] and is_furi_blank(furi))) and configs["generateFuriLine"] then
+			if (not (configs["noBlankFuri"] and is_furi_blank(furi))) and configs["generateFuriLine"] and line.comment ==true then
 				furi_count = furi_count +1
 				local furi_line = table.copy(line)
 				furi_line.text = furi.text
@@ -264,8 +276,8 @@ function stylize(subs)
 				furi_style.margin_r = 0
 				furi_style.align = ( (line.styleref.align <4) and 1) or 7
 				furi_style.fontsize = furi_style.fontsize*karaskel.furigana_scale
-				furi_style.outline  = furi_style.outline *karaskel.furigana_scale
-				furi_style.shadow   = furi_style.shadow  *karaskel.furigana_scale
+				furi_style.outline	= furi_style.outline *karaskel.furigana_scale
+				furi_style.shadow	= furi_style.shadow	 *karaskel.furigana_scale
 				furi_style.margin_t = line.eff_margin_t + line.height + configs["furiganaVerticalPositionFixed"] --furigana_vertical_position_fixed
 				furi_style.margin_b = line.eff_margin_b + line.height + configs["furiganaVerticalPositionFixed"] --furigana_vertical_position_fixed
 				furi_style.margin_v = line.eff_margin_v + line.height + configs["furiganaVerticalPositionFixed"] --furigana_vertical_position_fixed 
@@ -277,7 +289,7 @@ function stylize(subs)
 				
 				if configs["furiTimeMode"] == "syl" then
 					furi_line.start_time = furi.syl.start_time + line.start_time
-					furi_line.end_time = furi.syl.end_time   + line.start_time
+					furi_line.end_time = furi.syl.end_time	 + line.start_time
 				end
 				
 				if configs["furiTimeMode"] == "furi" then
@@ -316,8 +328,8 @@ function get_styles_range(subs)
    local style_start_i = nil
    local style_end_i = nil
    for i = 1, #subs do
-      local line = subs[i];
-      
+	  local line = subs[i];
+	  
 	  if not style_start_i and line.class == "style" then
 		  style_start_i = i
 	  end
@@ -331,8 +343,8 @@ end
 function get_dialogs_range(subs)
    local dialog_start_i = nil
    local dialog_end_i = nil
-      for i = 1, #subs do
-      local line = subs[i];
+	  for i = 1, #subs do
+	  local line = subs[i];
 	  
 	  if not dialog_start_i and line.class == "dialogue" then
 		  dialog_start_i = i
