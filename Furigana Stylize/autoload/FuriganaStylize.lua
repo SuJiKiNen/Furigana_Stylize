@@ -33,6 +33,7 @@ configs= {
 	["generateSylLine"] = false,
 	["sylTimeMode"] = "line",
 	["furiTimeMode"] = "line",
+	["fieldTextMode"] = "clean",
 }
 
 karaskel.furigana_scale = 0.5
@@ -84,6 +85,8 @@ dialog_config=
 	["sylTimeMode"]								 ={class="dropdown",name="sylTimeMode",							x=1,y=16,width=1,height=1,config=true,items={"line","syl"},value="line"},
 	["furiTimeModeLabel"]						 ={class="label",												x=0,y=17,width=1,height=1,config=false,label="Furi Time Mode:"},
 	["furiTimeMode"]							 ={class="dropdown",name="furiTimeMode",						x=1,y=17,width=1,height=1,config=true,items={"line","syl","furi"},value="line"},
+	["fieldTextModeLabel"]						 ={class="label",												x=0,y=18,width=1,height=1,config=false,label="Actor Field Text Mode:"},
+	["fieldTextMode"]							 ={class="dropdown",name="fieldTextMode",						x=1,y=18,width=1,height=1,config=true,items={"clean","rich"},value="clean"},
 }
 
 function remove_furiganas(subs) 
@@ -226,7 +229,9 @@ function stylize(subs)
 				syl_line.effect = "furigana"
 				syl_line.comment = false
 				syl_line.style = string.format("line_%d_syl_%d",i-dialog_start_i+1,syl_count)
-				syl_line.actor = string.format("{syl_%d_%d_%d}",syl.start_time,syl.end_time,syl.duration)
+				if configs["fieldTextMode"] == "rich" then
+					syl_line.actor = string.format("{syl_%d_%d_%d}",syl.start_time,syl.end_time,syl.duration)
+				end
 				syl_line.layer = syl_count
 				if configs["sylTimeMode"] == "syl" then
 					syl_line.start_time = line.start_time +syl.start_time
@@ -268,7 +273,9 @@ function stylize(subs)
 				furi_line.comment = false
 				furi_line.layer = furi_count
 				furi_line.style = string.format("line_%d_furi_%d",i-dialog_start_i+1,furi_count)
-				furi_line.actor = string.format("{furi_%d_%d_%d}",furi.start_time,furi.end_time,furi.duration)
+				if configs["fieldTextMode"] == "rich" then
+					furi_line.actor = string.format("{furi_%d_%d_%d}",furi.start_time,furi.end_time,furi.duration)
+				end
 				furi_line.layer = furi_count
 				local furi_style = table.copy(line.styleref)
 				furi_style.name = furi_line.style
